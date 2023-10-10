@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/test.css}"></link>
+</head>
+<body>
+<h3>타임리프 템플릿 : Spring el 테스트</h3>
+<hr>
+<h3 th:text="${message}"></h3>  <!-- th : 속성 이용하기 -->
+<ul>    <!-- 반복 -->
+    <li th:each="str:${list}" th:text="${str}"></li>
+</ul>
+<hr>
+<h3>[[${message}]]</h3>         <!-- 인라인 표기 -->
+<ul>
+    <th:block th:each="str,status:${list}">
+        <li>[[${str}]] - [[${status.index}]]</li>
+    </th:block>
+</ul>
+<hr>
+<h3>타임리프 링크 link 테스트</h3>
+<ul>
+    <!-- / 기호 : 루트 컨텍스트 패스 -->
+
+    <!-- / 가 있으면 상위 폴더 -->
+    <li><a th:href="@{/spring(name='momo',age=24)}">go Spring 1</a></li>
+    <!-- http://localhost:8085/spring?name=momo&age=24 -->  <!-- 오류 -->
+    <!-- spring.html 이 없으므로 오류 발생 -->
+
+    <!-- / 가 없으면 현재 폴더 -->
+    <li><a th:href="@{spring(name='momo',age=24)}">go Spring 2</a></li>
+    <!-- http://localhost:8085/sample/spring?name=momo&age=24 -->
+
+    <!-- @RequestParam(required = false) 설정시 파라미터가 없어도 가능 -->
+    <li><a th:href="@{spring}">go Spring 3</a></li>
+    <!-- http://localhost:8085/sample/spring -->
+</ul>
+</body>
+</html>

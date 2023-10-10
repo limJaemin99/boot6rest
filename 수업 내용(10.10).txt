@@ -1,0 +1,53 @@
+1. BookUser.java
+    @Pattern : 유효성 검증 패턴
+    @NotEmpty , @Size(min=10) 어노테이션 대신에 regexp 속성은 정규식, message 속성은 오류 메시지를 작성
+
+2. 1번 DTO 의 @Pattern 검사는 Controller 에서 @Valid 로 한다. (dto 앞에 표시)
+
+3. 2번에서 입력값이 유효성 검증 오류가 생기면 처리 방법은 Spring AOP(부가기능은 분리해서) 모듈을 사용
+    ▶ advice 클래스(부가기능 구현 클래스)로 실행한다.
+
+4. CustomRestAdvice.java
+    - @ExceptionHandler 어노테이션으로 BindException 처리하도록 한다.
+    - 유효성 검증 오류에 대한 정보를 갖는 BindingResult 객체 활용
+
+5. BookUserApiController.java
+    비교 : board 프로젝트의 SampleController와의 차이점
+
+    [차이점]
+        - 1) @RestController
+        - 2) Model 을 사용하지 않는다. ▶ Model 은 View 템플릿에 서버 데이터를 제공해서 html 웹 페이지를 만든다.
+        - 3) 핸들러 메소드의 리턴타입은 View 의 이름이 아니고, 응답으로 전송할 데이터 타입이다.
+        - 4) rest api 는 동기식 요청과 같은 파라미터는 없다.
+            ▶ 동기식의 파라미터는 path(URL 경로)에 포함
+            ▶ @PathVariable : URL 경로로 들어온 값을 저장하는 변수
+            ▶ @GetMapping("/bookuser/{id}") 에서 {id} 는 변수값
+
+    [공통점]
+        - DTO 를 메소드 인자, 즉 파라미터로 사용한다.
+
+6. 5번의 컨트롤러를 테스트하기 위해 swagger ui 를 설정해놨다. ▶ config 패키지
+    ▶ 실행은 브라우저에서 http://localhost:8082/swagger-ui/index.html
+
+7. GET 전체 , GET 하나 , POST , DELETE 매핑 메소드 작성하기
+
+8. admin.html (정적 리소스 이므로 static 폴더 아래에 만들기)
+    ▶ 사용가자 입력할 input 과 리스트 조회 결과를 보여줄 table 준비
+
+9. admin.js ▶ 비동기 통신을 위한 스크립트 작성하기
+
+★★★ 자바스크립트 ES6 에서 Promise 라는 객체를 사용해서 비동기 통신을 할 수 있는데, 자바스크립트 공부가 많이 필요한 부분이다.
+★★★ 그래서 교재에는 조금 편리한 사용을 위해 Axios 라는 자바스크립트 라이브러리를 사용하여 게시판의 댓글 부분을 구현하고 있다.
+★★★ 교재에는 영속성(db) 를 JPA 로 하는 부분까지 포함되어 있으므로 그 부분만 mybatis 로 대체해서 프로젝트 할 때는 사용해보세요.
+★★★ (html 과 js 위주로 참고)
+
+10. [연습]
+    ● 1단계 : 아이디로 조회 ⭕
+    ● 2단계 : POST(@Valid 유효성 오류 테스트도 해보세요)
+
+    ※ POST , PUT , PATCH 방식은 request body(json 문자열)를 보낼 때 아래 코드가 필요 ※
+        1) 헤더에 데이터 타입 설정
+            ▶ xhr.setRequestHeader("Content-Type","application/json; charset=UTF-8");
+        2) request body(json 문자열) 보내기
+            ▶ xhr.send(jsonStr)
+
