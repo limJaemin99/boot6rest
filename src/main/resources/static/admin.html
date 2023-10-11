@@ -11,7 +11,7 @@
     <h3>비동기 통신을 이용한 회원 관리</h3>
     <div style="width: 650px;" class="card">
         <div id="default">
-            <div class="card-header" id="chatBot">나는 챗봇입니다.</div>  <!-- 비동기 통신 작업 결과 메시지가 보일 곳 -->
+            <div class="card-header" id="chatBot">여기에 메시지가 나타납니다.</div>  <!-- 비동기 통신 작업 결과 메시지가 보일 곳 -->
         </div>
         <div class="form-group card-body">  <!-- 비동기 통신은 form 태그 없이 데이터를 전달할 수 있다. -->
             <div class="from-text" id="idMessage">
@@ -71,12 +71,14 @@
         </div>
     </div>
     <hr>
-    <button id="selectAll" class="btn btn-outline-dark">전체 조회 : GET</button>
-    <button id="selectOne" class="btn btn-outline-dark">아이디로 조회 : GET</button>
-    <button id="save" class="btn btn-outline-dark">회원 등록 : POST</button>
-    <button id="update" class="btn btn-outline-dark">회원 정보 수정 : PATCH</button>
-    <button id="delete" class="btn btn-outline-dark">회원 삭제 : DELETE</button>
-    <button id="clear" class="btn btn-outline-dark">초기화 (CLEAR)</button>
+    <div class="buttonGroup">
+        <button id="selectAll" class="btn btn-outline-dark">전체 조회 : GET</button>
+        <button id="selectOne" class="btn btn-outline-dark">아이디로 조회 : GET</button>
+        <button id="save" class="btn btn-outline-dark">회원 등록 : POST</button>
+        <button id="update" class="btn btn-outline-dark">회원 정보 수정 : PATCH</button>
+        <button id="delete" class="btn btn-outline-dark">회원 삭제 : DELETE</button>
+        <button id="clear" class="btn btn-outline-dark">초기화 (CLEAR)</button>
+    </div>
     <hr>
     <table id="list" style="width: 950px;" class="table table-hover">
         <thead>

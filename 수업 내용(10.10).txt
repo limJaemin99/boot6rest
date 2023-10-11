@@ -51,3 +51,4 @@
         2) request body(json 문자열) 보내기
             ▶ xhr.send(jsonStr)
 
+    ※ [static] - [js] - admin.js - save() 참고

@@ -28,7 +28,7 @@
 	<!-- password 컬럼 제외하고 여러 항목 변경할 때-->
 	<update id="changeMany">
 		update BOOKUSER
-		set email=#{email},birth=#{birth},subjects=#{subjects}
+		set email=#{email},birth=#{birth},subjects=#{subjects},password=#{password}
 		where id=#{id}
 	</update>
 	<!-- birth, password, email , subjects 컬럼을 각각 변경할 때-->
